@@ -1,4 +1,4 @@
-import ERCwebscraping
+from lib import ERCwebscraping
 
 
 startrowid = 0
