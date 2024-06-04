@@ -4,6 +4,17 @@ import pandas as pd
 from pandas import json_normalize
 import base64
 
+### Usernamepassword input format as "username:password" ##
+try:
+    apis = pd.read_csv('apis.txt', sep=",", header=None)
+    print('Done_loading')
+except:
+    print("Need apis")
+
+apis[1] = apis[1].astype('str')
+apis = apis.set_index(0)
+apis_dict = apis.to_dict()
+
 def converttobase64(usernamepassword) :
     sample_string = usernamepassword
     sample_string_bytes = sample_string.encode("ascii") 
@@ -14,7 +25,7 @@ def converttobase64(usernamepassword) :
 
 def gettoken(usernamepasswordBase64string) :
     print( "Getting Token" )
-    url = "https://www.sothailand.com/PSCODWebAPI/api/LoginApi/GetToken"
+    url = apis_dict[1]['urlgettoken']
     token = requests.get(url, headers={'Authorization': 'Basic ' + usernamepasswordBase64string})
     bufftoken = json.loads(token.content)
     outtoken = bufftoken['access_token']
@@ -23,7 +34,7 @@ def gettoken(usernamepasswordBase64string) :
 
 def importdailyfuel(startdate,enddate,token) :
     print( "Import daily fuel data from " + str(startdate) + " to " +  str(enddate) )
-    url = "https://www.sothailand.com/PSCODWebAPI/api/FuelDataApi/GetDailyFuelWH"
+    url = apis_dict[1]['urlgetdailyfueldata']
     header = {
         'token' : token,
         'st' : startdate,
@@ -38,7 +49,7 @@ def importdailyfuel(startdate,enddate,token) :
 
 def importdailyenergy(startdate,enddate,token) :
     print( "Import daily energy data from " + str(startdate) + " to " +  str(enddate) )
-    url = "https://www.sothailand.com/PSCODWebAPI/api/EnergyDataApi/GetDailyEnergyCompareWH"
+    url = apis_dict[1]['urlgetdailyenergydata']
     header = {
         'token' : token,
         'st' : startdate,

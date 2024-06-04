@@ -1,8 +1,8 @@
 from lib import ERCwebscraping
 
 
-startrowid = 0
-endrowid = 2
+startrowid = 1
+endrowid = 40
 storingpath = ''
 
 dat = ERCwebscraping.obtaindata(startrowid,endrowid)
