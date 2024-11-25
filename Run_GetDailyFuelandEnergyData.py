@@ -12,8 +12,8 @@ usernamepasswordbase64 = psd.converttobase64(usernamepassword)
 token = psd.gettoken(usernamepasswordbase64)
 
 ### Date input format as "Date/Month/Year"
-startdate = '01/01/2024'
-enddate = '31/01/2024'
+startdate = '01/01/2021'
+enddate = '31/12/2021'
 
 dt_dailyfueldata = psd.importdailyfuel(startdate,enddate,token)
 dt_dailyfueldata.to_csv('Output\\'+'DailyFuelData_'+startdate.replace('/','-')+'_to_'+enddate.replace('/','-')+'.csv',encoding="utf-8-sig",index=False)
