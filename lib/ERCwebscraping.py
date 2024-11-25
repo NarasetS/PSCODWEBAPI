@@ -35,7 +35,7 @@ def obtaindata(startrowid, endrowid):
 
     for rowid in range(startrowid,(endrowid+1)):
         print("rowid = "+str(rowid))
-        url = 'https://app03.erc.or.th/ERCSPP/ListViewDetail.aspx?RowID=' + str(rowid)
+        url = 'https://ws.erc.or.th/ERCSPP/ListViewDetail.aspx?RowID=' + str(rowid)
         res = requests.get(url,verify=False)
         res.encoding = "utf-8"
         if res.status_code == 404:
